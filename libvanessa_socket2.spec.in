@@ -1,0 +1,102 @@
+Summary: Simplify TCP/IP socket operations
+Name: libvanessa_socket2
+Version: @VERSION@
+Release: 1
+License: GNU Lesser General Public Licence (examples released under the GNU General Public Licence)
+URL: http://www.vergenet.net/linux/vanessa/
+Group: Development/Libraries
+Source0: ftp://vergenet.net/pub/vanessa_socket/vanessa_socket/vanessa_socket-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+Provides: %{name}-%{version}
+BuildRequires: gcc make libvanessa_logger0-devel >= 0.0.8
+
+%description
+Library to simplify TCP/IP socket operations. Includes code to
+open a socket to a server as a client, to listen on socket for
+clients as a server and to pipe information between sockets.
+
+
+%package devel
+Summary: Headers and static libraries for development
+Group: Development/Libraries
+Requires: %{name}-%{version} libvanessa_logger0-devel >= 0.0.8
+Provides: %{name}-devel-%{version}
+
+%description devel
+Headers and static libraries required to develop against libvanessa_socket.
+
+
+%package -n vanessa_socket-pipe
+Summary: Trivial TCP/IP pipe build using libvanessa_adt
+Group:  Applications/System
+License: GNU General Public Licence
+Requires: %{name}-%{version}
+Provides: %{name}-pipe-%{version}
+%if 0%{?centos_version} || 0%{?rhel_version}
+BuildRequires: popt
+%else
+%if 0%{?mandriva_version}
+BuildRequires: libpopt-devel
+%else
+BuildRequires: popt-devel
+%endif
+%endif
+
+%description -n vanessa_socket-pipe
+A TCP/IP pipe is a user space programme that listens for TCP/IP connections on
+port on the local host and when a client connects makes a connection to a
+TCP/IP port, possibly on another host. Once both connections are established
+data sent on one connection is relayed to the other, hence forming a
+bi-directional pipe.
+
+Uses include enabling connections to specific ports on hosts behind a
+packet filter.
+
+This code is intended primarily as an example of how many of the
+features of libvanessa_socket work.
+
+%prep
+%setup -n vanessa_socket-%{version}
+
+%build
+
+%configure --disable-static
+make
+
+%install
+make DESTDIR=$RPM_BUILD_ROOT install
+
+# Don't install libvanessa_socket.la
+[ ! -e $RPM_BUILD_ROOT/%{_libdir}/libvanessa_socket.la ] || \
+	rm $RPM_BUILD_ROOT/%{_libdir}/libvanessa_socket.la
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+
+%post
+ldconfig
+
+%postun
+ldconfig
+
+%files 
+%defattr(-, root, root)
+%{_libdir}/*.so.*
+
+%files devel
+%defattr(-, root, root)
+%{_libdir}/*.so
+%{_libdir}/pkgconfig/*
+%{_includedir}/*.h
+%doc README COPYING ChangeLog
+
+%files -n vanessa_socket-pipe
+%defattr(-, root, root)
+%{_bindir}/*
+%{_mandir}/man1/*
+%doc vanessa_socket_pipe/COPYING
+
+%changelog
+* Tue Jun 22 2010 Simon Horman <horms@verge.net.au> (0.0.12-1)
+  new release

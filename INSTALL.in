@@ -1,0 +1,79 @@
+INSTALL
+
+vanessa_socket
+Library to simplify handling of TCP sockets
+Copyright (C) 1999-2008  Simon Horman <horms@verge.net.au>
+----------------------------------------------------------------------
+
+
+To install vanessa_socket 
+-------------------------
+
+tar zxf vanessa_socket-@VERSION@.tar.gz
+cd vanessa_socket-@VERSION@
+./configure [--prefix=/usr]
+make
+make install
+
+
+To build RPMS
+-------------
+
+rpmbuild -ta vanessa_socket-@VERSION@.tar.gz
+
+or
+
+cd vanessa_socket-@VERSION@
+./configure --prefix=/usr
+make distcheck
+rpmbuild -ta vanessa_socket-@VERSION@.tar.gz
+
+
+N.B: If you have an older version of rpm you may need to use
+     the "rpm" command instead of "rpmbuild". The command line
+     options should be the same.
+
+
+To Build Debian Packages
+------------------------
+
+dpkg-buildpackage [-uc] [-us]
+
+
+To install on Solaris 8
+-----------------------
+
+You may need to set some envirnoment variables to aid the build process.
+The following worked for me using a bourne shell. Make apropriate
+adjustments if you are using a C shell.
+
+CPPFLAGS="-I/usr/local/include/"
+export CPPFLAGS
+LDFLAGS="-L/usr/local/lib/"
+export LDFLAGS
+
+cd vanessa_socket-@VERSION@
+./configure [--prefix=/usr]
+make
+make install
+
+
+To install on FreeBSD 4.2-RELEASE
+---------------------------------
+
+You may need to set some envirnoment variables to aid the build process.
+The following worked for me using a bourne shell. Make apropriate
+adjustments if you are using a C shell.
+
+CPPFLAGS="-I/usr/local/include/"
+export CPPFLAGS
+LDFLAGS="-L/usr/local/lib/"
+export LDFLAGS
+
+The Makefiles that are generated may not work with make so use
+gmake instead.
+
+cd vanessa_socket-@VERSION@
+./configure [--prefix=/usr]
+gmake
+gmake install

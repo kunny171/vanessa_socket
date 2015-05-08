@@ -1,0 +1,47 @@
+
+vanessa_socket
+Library to simplify handling of TCP sockets
+Copyright (C) 1999-2008  Simon Horman <horms@verge.net.au>
+
+This copyright covers all materials supplied with vanessa_socket other than
+the vanessa_socket_pipe programme.  This includes includes, but not limited
+to:
+  The library itself
+  Documentation
+  Packaging information for RPM and Debian
+
+
+vanessa_adt
+Library of Abstract Data Types
+Copyright (C) 1999-2008  Simon Horman <horms@verge.net.au>
+
+This copyright covers all materials supplied with vanessa_adt
+including, but not limited to:
+  The library itself
+  Sample code
+  Documentation
+  Packaging information for RPM and Debian
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+The complete text of the LGPL license can be found in on Debian
+systems at /usr/share/common-licenses/LGPL.
+
+
+vanessa_socket_pipe
+Trivial TCP pipe
+Copyright (C) 1999-2008  Simon Horman <horms@verge.net.au>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+
+The complete text of the GPL license can be found in on Debian
+systems at /usr/share/common-licenses/GPL.
+
+
+This package is available by FTP from:
+ftp://ftp.vergenet.net/pub/vanessa/vanessa_socket/
